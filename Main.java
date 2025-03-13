@@ -1,11 +1,28 @@
 package movies;
 
+import movies.models.Customer;
+import movies.models.Movie;
+import movies.models.Rental;
+import movies.models.pricing.ChildrenPrice;
+import movies.models.pricing.NewReleasePrice;
+import movies.models.pricing.RegularPrice;
+import movies.reports.PlainTextRentalReport;
+import movies.reports.RentalReport;
+
 public class Main {
     public static void main(String[] args) {
-        Customer customer = new Customer("Test");
-        customer.addRental(new Rental(new Movie("Zack Snyder's Justice League", 1), 5));
-        customer.addRental(new Rental(new Movie("Terminator", 0), 1));
-        customer.addRental(new Rental(new Movie("Soul", 2), 3));
-        System.out.println(customer.statement());
+        final Customer customer = new Customer("Test");
+
+        final Movie movie1 = new Movie("Zack Snyder's Justice League", new NewReleasePrice());
+        final Movie movie2 = new Movie("Terminator", new RegularPrice());
+        final Movie movie3 = new Movie("Soul", new ChildrenPrice());
+
+        customer.addRental(new Rental(movie1, 5));
+        customer.addRental(new Rental(movie2, 1));
+        customer.addRental(new Rental(movie3, 3));
+
+        final RentalReport reportGenerator = new PlainTextRentalReport();
+        final String report = reportGenerator.generateReport(customer);
+        System.out.println(report);
     }
 }
