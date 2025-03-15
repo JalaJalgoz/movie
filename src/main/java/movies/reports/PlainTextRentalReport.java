@@ -7,7 +7,7 @@ public class PlainTextRentalReport implements RentalReport {
     @Override
     public String generateReport(Customer customer) {
         if (customer == null) {
-            throw new IllegalArgumentException("Customer needed");
+            throw new IllegalArgumentException("Customer can't be null.");
         }
 
         StringBuilder report = new StringBuilder("Rental Record for " + customer.getName() + "\n");
@@ -28,6 +28,8 @@ public class PlainTextRentalReport implements RentalReport {
 
         report.append("Amount owed is ").append(totalAmount).append("\n");
         report.append("You earned ").append(rentalPoints).append(" frequent renter points\n");
+
+        System.out.println(report);
 
         return report.toString();
     }

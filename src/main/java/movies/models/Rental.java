@@ -1,16 +1,20 @@
 package movies.models;
 
 public class Rental {
-    private Movie movie;
-    private int daysRented;
+    private final Movie movie;
+    private final int daysRented;
 
     public Rental(final Movie movie, final int daysRented) {
+        if (movie == null) {
+            throw new IllegalArgumentException("Movie can't be null.");
+        }
+
+        if (daysRented < 0) {
+            throw new IllegalArgumentException("The number of rented days can't be negative.");
+        }
+
         this.movie = movie;
         this.daysRented = daysRented;
-    }
-
-    public int getDaysRented() {
-        return daysRented;
     }
 
     public Movie getMovie() {
