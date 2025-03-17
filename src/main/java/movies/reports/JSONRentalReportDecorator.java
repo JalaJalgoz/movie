@@ -3,10 +3,10 @@ package movies.reports;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import movies.exceptions.ReportException;
 import movies.models.Customer;
+import movies.models.dto.ReportDataDto;
 import movies.persist.ReportPersister;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +27,7 @@ public class JSONRentalReportDecorator extends RentalReportDecorator {
         try {
             // We call the previous report decorator
             decoratedReport.generateReport(customer);
-            Map<String, Object> reportData = getReportDataAsObjectMap(customer);
+            final ReportDataDto reportData = getReportDataAsObjectMap(customer);
 
             // Serializar JSON
             String jsonReport = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportData);

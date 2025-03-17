@@ -26,7 +26,7 @@ public class Main {
         customer.addRental(new Rental(movie3, 3));
 
         final RentalReport plainTextReport = new PlainTextRentalReport();
-        final RentalReportDecorator jsonReport = new JSONRentalReportDecorator(null);
+        final RentalReportDecorator jsonReport = new JSONRentalReportDecorator(plainTextReport);
         final RentalReportDecorator xmlReport = new XMLRentalReportDecorator(jsonReport);
         xmlReport.generateReport(customer);
     }

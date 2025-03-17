@@ -3,10 +3,10 @@ package movies.reports;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import movies.exceptions.ReportException;
 import movies.models.Customer;
+import movies.models.dto.ReportDataDto;
 import movies.persist.ReportPersister;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +26,7 @@ public class XMLRentalReportDecorator extends RentalReportDecorator {
         }
         try {
             decoratedReport.generateReport(customer);
-            Map<String, Object> reportData = getReportDataAsObjectMap(customer);
+            final ReportDataDto reportData = getReportDataAsObjectMap(customer);
 
             // Serializar XML
             String xmlReport = xmlMapper

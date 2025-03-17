@@ -1,12 +1,17 @@
 package movies.models.pricing;
 
+import movies.utils.PricingConstants;
+
 public class ChildrenPrice implements Price {
+    private static final double LIMIT_DAYS_RENTED = 3;
+    private static final double PRICE = 1.5;
+
     @Override
     public double getCharge(int daysRented) {
-        double charge = 1.5;
+        double charge = PRICE;
 
-        if (daysRented > 3) {
-            charge = charge + (daysRented - 3) * 1.5;
+        if (daysRented > LIMIT_DAYS_RENTED) {
+            charge = charge + (daysRented - LIMIT_DAYS_RENTED) * PricingConstants.MULTIPLYING_FACTOR;
         }
 
         return charge;
@@ -14,6 +19,6 @@ public class ChildrenPrice implements Price {
 
     @Override
     public int getFrequentRenterPoints(int daysRented) {
-        return 1;
+        return PricingConstants.NORMAL_FREQUENT_RENTER_POINTS;
     }
 }
